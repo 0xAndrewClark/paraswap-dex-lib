@@ -60,7 +60,7 @@ describe('GenericRFQ E2E Mainnet', () => {
           thirdPartyAddress: testAccount.address,
           _amount: '1000000000000000000',
           swapSide: SwapSide.SELL,
-          dexKey: dexKey,
+          dexKeys: dexKey,
           contractMethod: ContractMethod.simpleSwap,
           network: network,
         });
@@ -75,7 +75,7 @@ describe('GenericRFQ E2E Mainnet', () => {
           thirdPartyAddress: testAccount.address,
           _amount: '1000000000000000000',
           swapSide: SwapSide.SELL,
-          dexKey: dexKey,
+          dexKeys: dexKey,
           contractMethod: ContractMethod.simpleSwap,
           network: network,
         });
@@ -90,7 +90,7 @@ describe('GenericRFQ E2E Mainnet', () => {
           thirdPartyAddress: testAccount.address,
           _amount: '1000000000000000000',
           swapSide: SwapSide.BUY,
-          dexKey: dexKey,
+          dexKeys: dexKey,
           contractMethod: ContractMethod.simpleBuy,
           network: network,
         });
@@ -105,7 +105,7 @@ describe('GenericRFQ E2E Mainnet', () => {
           thirdPartyAddress: testAccount.address,
           _amount: '1000000000000000000',
           swapSide: SwapSide.BUY,
-          dexKey: dexKey,
+          dexKeys: dexKey,
           contractMethod: ContractMethod.simpleBuy,
           network: network,
         });

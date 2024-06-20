@@ -133,8 +133,8 @@ describe(`GenericRFQ ${dexKey} E2E`, () => {
         }
         const contractMethod =
           testCase.swapSide === SwapSide.BUY
-            ? ContractMethod.swapExactAmountInOutOnAugustusRFQTryBatchFill
-            : ContractMethod.swapExactAmountInOutOnAugustusRFQTryBatchFill;
+            ? ContractMethod.swapOnAugustusRFQTryBatchFill
+            : ContractMethod.swapOnAugustusRFQTryBatchFill;
         describe(`${contractMethod}`, () => {
           it(`${testCase.swapSide} ${testCase.srcToken} -> ${testCase.destToken}`, async () => {
             await newTestE2E({
