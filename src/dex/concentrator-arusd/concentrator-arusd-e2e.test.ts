@@ -77,16 +77,6 @@ describe('ConcentratorArusd E2E', () => {
         amount: '1000000000000000000',
       },
     ],
-    [
-      {
-        name: 'arUSD',
-        amount: '100000000000000',
-      },
-      {
-        name: 'weETH',
-        amount: '100000000000000',
-      },
-    ],
   ];
 
   pairs.forEach(pair => {

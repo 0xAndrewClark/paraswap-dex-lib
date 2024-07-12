@@ -144,8 +144,6 @@ describe('ConcentratorArusd', function () {
     const srcTokenSymbol_arUSD = 'arUSD';
     const destTokenSymbol_rUSD = 'rUSD';
 
-    const destTokenSymbol_weETH = 'weETH';
-
     const amountsForSell = [
       0n,
       1n * BI_POWS[18],
