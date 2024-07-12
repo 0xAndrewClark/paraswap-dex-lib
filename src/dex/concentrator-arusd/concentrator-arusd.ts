@@ -93,7 +93,7 @@ export class ConcentratorArusd
     _tokenOut: Address,
     _amountsIn: bigint[],
     blockNumber: number,
-  ) {
+  ): Promise<bigint[]> {
     let data: bigint[] = _amountsIn;
     try {
       if (this.is_rUSD(_tokenIn)) {
@@ -173,32 +173,18 @@ export class ConcentratorArusd
     if (!isArUSDSwapToken) {
       return null;
     }
-    // const _amountsData = await this.getAmountOut(
-    //   srcToken.address,
-    //   destToken.address,
-    //   amounts,
-    //   blockNumber,
-    // );
+    const prices = await this.getAmountOut(
+      srcToken.address,
+      destToken.address,
+      amounts,
+      blockNumber,
+    );
 
-    const bigIntArray = [
-      0n,
-      100653254285561269n,
-      201306508571122539n,
-      301959762856683808n,
-      402613017142245078n,
-      503266271427806348n,
-      603919525713367617n,
-      704572779998928887n,
-      805226034284490157n,
-      905879288570051426n,
-      1006532542855612696n,
-    ];
-
-    console.log('amounts---', amounts, bigIntArray);
+    // console.log('amounts---', amounts, prices);
     return [
       {
         unit: 1000000000000000000n,
-        prices: amounts,
+        prices,
         data: {},
         poolAddresses: [this.config.arUSDAddress],
         exchange: this.dexKey,

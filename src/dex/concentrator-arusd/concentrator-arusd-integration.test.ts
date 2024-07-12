@@ -73,7 +73,10 @@ async function checkOnChainPricing(
       amounts,
     ),
   );
-  expect(prices).toEqual(expectedPrices);
+
+  expect(prices.map(item => String(item))).toEqual(
+    expectedPrices.map(item => String(item)),
+  );
 }
 
 async function testPricingOnNetwork(
