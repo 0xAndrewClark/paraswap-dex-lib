@@ -188,7 +188,7 @@ export class ConcentratorArusd
         data: {},
         poolAddresses: [this.config.arUSDAddress],
         exchange: this.dexKey,
-        gasCost: 70000,
+        gasCost: 1000000,
       },
     ];
   }
