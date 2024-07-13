@@ -22,7 +22,7 @@ function getReaderCalldata(
 ) {
   return amounts.map(amount => ({
     target: exchangeAddress,
-    callData: readerIface.encodeFunctionData(funcName, []),
+    callData: readerIface.encodeFunctionData(funcName, [amount]),
   }));
 }
 
@@ -30,12 +30,10 @@ function decodeReaderResult(
   results: Result,
   readerIface: Interface,
   funcName: string,
-  destTokenSymbol: string,
-  amounts: bigint[],
 ) {
-  return results.map((result, index) => {
+  return results.map(result => {
     const parsed = readerIface.decodeFunctionResult(funcName, result);
-    return BigInt(parsed[0]._hex) * BigInt(amounts[index + 1] / BI_POWS[18]);
+    return BigInt(parsed[0]._hex);
   });
 }
 
@@ -47,7 +45,7 @@ async function checkOnChainPricing(
   amounts: bigint[],
   destTokenSymbol: string,
 ) {
-  const exchangeAddress = '0x65D72AA8DA931F047169112fcf34f52DbaAE7D18';
+  const exchangeAddress = '0x07D1718fF05a8C53C8F05aDAEd57C0d672945f9a';
 
   // Normally you can get it from concentratorArusd.Iface or from eventPool.
   // It depends on your implementation
@@ -65,18 +63,9 @@ async function checkOnChainPricing(
   ).returnData;
 
   const expectedPrices = [0n].concat(
-    decodeReaderResult(
-      readerResult,
-      readerIface,
-      funcName,
-      destTokenSymbol,
-      amounts,
-    ),
+    decodeReaderResult(readerResult, readerIface, funcName),
   );
-
-  expect(prices.map(item => String(item))).toEqual(
-    expectedPrices.map(item => String(item)),
-  );
+  expect(prices).toEqual(expectedPrices);
 }
 
 async function testPricingOnNetwork(
@@ -176,7 +165,7 @@ describe('ConcentratorArusd', function () {
         destTokenSymbol_arUSD,
         SwapSide.SELL,
         amountsForSell,
-        'nav',
+        'previewDeposit',
       );
     });
 
@@ -190,7 +179,7 @@ describe('ConcentratorArusd', function () {
         destTokenSymbol_rUSD,
         SwapSide.SELL,
         amountsForSell,
-        'nav',
+        'previewRedeem',
       );
     });
 
