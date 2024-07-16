@@ -124,7 +124,10 @@ export class FxProtocolRusd
   ): Promise<bigint[]> {
     const is_weETH_src = this.is_weETH(_tokenIn.address);
     const weETHUsdPrice = await this.dexHelper.getTokenUSDPrice(
-      _tokenOut,
+      {
+        address: this.config.weETHAddress,
+        decimals: 18,
+      },
       BigInt(getBigNumberPow(_tokenOut.decimals).toFixed(0)),
     );
 
@@ -144,7 +147,8 @@ export class FxProtocolRusd
     if (is_weETH_src) {
       _amountsOut = _amountsIn.map(_amountIn =>
         BigInt(
-          (BigInt(results[0].returnData) * BigInt(weETHUsdPrice) * _amountIn) /
+          (BigInt(weETHUsdPrice) * _amountIn) /
+            BigInt(results[0].returnData) /
             BI_POWS[18],
         ),
       );

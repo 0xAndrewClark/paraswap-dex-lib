@@ -46,8 +46,7 @@ function decodeReaderResult(
     return results.map((result, index) => {
       const parsed = readerIface.decodeFunctionResult('nav', result);
       return (
-        BigInt(parsed[0]._hex) *
-        BigInt(weETHUsdPrice) *
+        (BigInt(weETHUsdPrice) / BigInt(parsed[0]._hex)) *
         BigInt(amounts[index + 1] / BI_POWS[18])
       );
     });
